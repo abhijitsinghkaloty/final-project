@@ -1,3 +1,5 @@
-# final-project
+# CS50 Final-Project
 
-Kindness Website  
+Kindness Website 
+
+
