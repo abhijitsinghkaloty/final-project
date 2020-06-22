@@ -3,6 +3,7 @@ from flask import Flask, render_template, session, redirect, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from tempfile import mkdtemp
 from flask_session import Session
+from functools import wraps
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -17,7 +18,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Setup database connection
-db = SQL("sqlite3:///databases/project.db")
+#db = SQL("sqlite3:///databases/project.db")
 
 
 def login_required(f):
@@ -32,6 +33,12 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+@app.route("/")
+@login_required
+def home():
+    return "HELLO"
 
 
 @app.route("/login", methods=["GET", "POST"])

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block body %}
+
+	<form action="/login" method="POST">
+		<input type="text" placeholder="Username" name="username">
+		<input type="password" placeholder="Password" name="password" minlength="8">
+		<input type="password" placeholder="Confirm Password" name="confirmation" minlength="8">
+	</form>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
