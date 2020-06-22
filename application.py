@@ -18,7 +18,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Setup database connection
-#db = SQL("sqlite3:///databases/project.db")
+db = SQL("sqlite3:///database/kindness.db")
 
 
 def login_required(f):
