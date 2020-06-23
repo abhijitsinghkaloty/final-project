@@ -12,7 +12,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 # Setup Flask Server
 app = Flask(__name__)
 
-# Configure session to use filesystem 
+# Configure session to use filesystem
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -58,14 +58,14 @@ def login():
 
     # clear session data
     session.clear()
-    
+
     # If GET request
     if request.method == "GET":
-        # Render login.html 
+        # Render login.html
         return render_template("login.html")
 
     # If POST request
-    # Data passed to the form 
+    # Data passed to the form
     # Store as variables
     username = request.form.get("username")
     password = request.form.get("password")
@@ -78,7 +78,7 @@ def login():
     if not data or not check_password_hash(data[0]["hash"], password):
         # Wrong Credentials Display error message
         pass
-    
+
     # Store as a session variable the user id from database
     session["user_id"] = data[0]["id"]
 
@@ -92,7 +92,7 @@ def register():
     REGISTER to the site
     :PARAMS: NONE
     :RETURN: render template, redirect
-    """    
+    """
 
     # If GET request
     if request.method == "GET":
@@ -105,11 +105,11 @@ def register():
     username = request.form.get("username")
     password = request.form.get("password")
     confirm = request.form.get("confirm")
-    
+
 
     # Check Username for validity
     if not username:
-        # No username was entered 
+        # No username was entered
         # DISPLAY ERROR MESSAGE
         pass
 
@@ -119,7 +119,7 @@ def register():
         pass
 
     # Check password and password confirmation for validity
-    if not password: 
+    if not password:
         # No password was entered
         # DISPLAY ERROR MESSAGE
         pass
@@ -135,15 +135,15 @@ def register():
         pass
 
 
-    # Hash the password 
+    # Hash the password
     hashed = generate_password_hash(password)
-    
+
     """ Store usernme and hash of password to database """
     db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)", username, hashed)
 
     # Query database for user_id and store as a session variable
     session["user_id"] = db.execute("SELECT id FROM users WHERE username = :username", username)
-    
+
     # Redirect to homepage
     return redirect("/")
 
@@ -161,11 +161,6 @@ def logout():
 
     # Redirect homepage
     return redirect("/")
-
-
-if __name__ == "__main__":
-    app.run()
-
 
 
 
