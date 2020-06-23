@@ -25,7 +25,7 @@ def badWordChecker(message):
 
         # Use regex on badWords
         for word in range(len(badWords)):
-            badWords[word] = ".?" + re.escape(badWords[word]) + ".?"
+            badWords[word] = ".*" + re.escape(badWords[word]) + ".*"
 
 
         # for every word in message
