@@ -35,10 +35,15 @@ def login_required(f):
     return decorated_function
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def home():
-    return "HELLO"
+
+    # If Get Request
+    if request.method == "GET":
+        username = db.execute("SELECT username FROM users WHERE id = :id", session["user_id"])
+
+        return render_template("home.html", username=username)
 
 
 @app.route("/login", methods=["GET", "POST"])
