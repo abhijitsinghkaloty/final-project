@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
-from flask import redirect, session, render
+from flask import redirect, session, render_template
 from cs50 import SQL
 
 db = SQL("sqlite:///database/kindness.db")
