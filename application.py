@@ -5,9 +5,7 @@ from flask import Flask, render_template, session, redirect, request, flash, url
 from werkzeug.security import generate_password_hash, check_password_hash
 from tempfile import mkdtemp
 from flask_session import Session
-from functools import wraps
-from werkzeug.security import check_password_hash, generate_password_hash
-
+from helpers import login_required, credentialCheck
 
 # Setup Flask Server
 app = Flask(__name__)
@@ -21,20 +19,6 @@ Session(app)
 
 # Setup database connection
 db = SQL("sqlite:///database/kindness.db")
-
-
-def login_required(f):
-    """
-    Decorate routes to require login.
-
-    http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
-    """
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get("user_id") is None:
-            return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated_function
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -70,17 +54,18 @@ def login():
     username = request.form.get("username")
     password = request.form.get("password")
 
-    # Query database of user data
-    data = db.execute("SELECT * FROM users WHERE username = :username", username)
+    # Returns a TUPLE if something went wrong (ERROR CODE, MESSAGE)
+    # Returns an INT that is equal to the user_id in the database
+    check = credentialCheck(username, password, True)
 
-    # Check if data has record of username
-    # Check if password is valid
-    if not data or not check_password_hash(data[0]["hash"], password):
-        # Wrong Credentials Display error message
-        pass
+    # Returns true if it is a tuple
+    state = isinstance(check, tuple)
 
-    # Store as a session variable the user id from database
-    session["user_id"] = data[0]["id"]
+    if state:
+        return apology(check[0], check[1])
+    else:
+        # Store as a session variable the user id from database
+        session["user_id"] = check
 
     # redirect to homepage
     return redirect("/")
@@ -111,28 +96,28 @@ def register():
     if not username:
         # No username was entered
         # DISPLAY ERROR MESSAGE
-        pass
+        return apology(404, "PLEASE ENTER USERNAME")
 
     elif db.execute("SELECT * FROM user WHERE username = :username", username):
         # Username unavailable
         # DISPLAY ERROR MESSAGE
-        pass
+        return apology(403, "USERNAME ALREADY TAKEN")
 
     # Check password and password confirmation for validity
     if not password:
         # No password was entered
         # DISPLAY ERROR MESSAGE
-        pass
+        return apology(404, "PLEASE ENTER PASSWORD")
 
     elif not confirm:
         # No password confirmation was entered
         # DISPLAY ERROR MESSAGE
-        pass
+        return apology(404, "PLEASE CONFIRM PASSWORD")
 
     elif not password == confirm:
         # Password and Password Confirmation are not equal
         # DISPLAY ERROR MESSAGE
-        pass
+        return apology(404, "PASSWORD AND PASSWORD CONFIRMATION ARE NOT THE SAME")
 
 
     # Hash the password
