@@ -5,7 +5,7 @@ from flask import Flask, render_template, session, redirect, request, flash, url
 from werkzeug.security import generate_password_hash, check_password_hash
 from tempfile import mkdtemp
 from flask_session import Session
-from helpers import login_required, credentialCheck
+from helpers import login_required, credentialCheck, apology
 
 # Setup Flask Server
 app = Flask(__name__)
@@ -62,7 +62,8 @@ def login():
     state = isinstance(check, tuple)
 
     if state:
-        return apology(check[0], check[1])
+        # Something went wrong
+        return apology(check[1], check[0])
     else:
         # Store as a session variable the user id from database
         session["user_id"] = check
@@ -91,35 +92,15 @@ def register():
     password = request.form.get("password")
     confirm = request.form.get("confirm")
 
+    check = credentialCheck(username, password, confirm)
 
-    # Check Username for validity
-    if not username:
-        # No username was entered
-        # DISPLAY ERROR MESSAGE
-        return apology(404, "PLEASE ENTER USERNAME")
+    # Returns true if it is a tuple
+    state = isinstance(check, tuple)
 
-    elif db.execute("SELECT * FROM user WHERE username = :username", username):
-        # Username unavailable
-        # DISPLAY ERROR MESSAGE
-        return apology(403, "USERNAME ALREADY TAKEN")
-
-    # Check password and password confirmation for validity
-    if not password:
-        # No password was entered
-        # DISPLAY ERROR MESSAGE
-        return apology(404, "PLEASE ENTER PASSWORD")
-
-    elif not confirm:
-        # No password confirmation was entered
-        # DISPLAY ERROR MESSAGE
-        return apology(404, "PLEASE CONFIRM PASSWORD")
-
-    elif not password == confirm:
-        # Password and Password Confirmation are not equal
-        # DISPLAY ERROR MESSAGE
-        return apology(404, "PASSWORD AND PASSWORD CONFIRMATION ARE NOT THE SAME")
-
-
+    if state:
+        # Something went wrong
+        return apology(check[1], check[0])
+      
     # Hash the password
     hashed = generate_password_hash(password)
 
