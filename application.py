@@ -54,19 +54,16 @@ def login():
     username = request.form.get("username")
     password = request.form.get("password")
 
-    # Returns a TUPLE if something went wrong (ERROR CODE, MESSAGE)
+    # Returns a FALSE if something went wrong 
     # Returns an INT that is equal to the user_id in the database
     check = credentialCheck(username, password, True)
 
-    # Returns true if it is a tuple
-    state = isinstance(check, tuple)
-
-    if state:
+    if not check:
         # Something went wrong
-        return apology(check[1], check[0])
-    else:
-        # Store as a session variable the user id from database
-        session["user_id"] = check
+        return apology()
+
+    # Store as a session variable the user id from database
+    session["user_id"] = check
 
     # redirect to homepage
     return redirect("/")
@@ -92,14 +89,14 @@ def register():
     password = request.form.get("password")
     confirm = request.form.get("confirm")
 
+    # RETURN: False if something went wrong
+    # Return: True if all is well
     check = credentialCheck(username, password, confirm)
 
-    # Returns true if it is a tuple
-    state = isinstance(check, tuple)
 
-    if state:
+    if not check:
         # Something went wrong
-        return apology(check[1], check[0])
+        return apology()
       
     # Hash the password
     hashed = generate_password_hash(password)
