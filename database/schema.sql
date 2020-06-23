@@ -1,3 +1,4 @@
+-- EXECUTED
 CREATE TABLE IF NOT EXISTS users (
 
 	id INTEGER NOT NULL,
@@ -10,7 +11,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 );
 
-CREATE TABLE IF NOT EXISTS person (
+-- EXECUTED
+CREATE TABLE IF NOT EXISTS profile (
 
 	person_id INTEGER NOT NULL,
 
@@ -20,7 +22,19 @@ CREATE TABLE IF NOT EXISTS person (
 
 	age INTEGER,
 
+	country TEXT,
+
 	FOREIGN KEY (person_id) REFERENCES users(id)
 
 );
 
+CREATE TABLE IF NOT EXISTS posts (
+
+	user_id INTEGER NOT NULL,
+
+	support INTEGER DEFAULT 0,
+
+	posted TEXT NOT NULL, 
+
+	FOREIGN KEY (user_id) REFERENCES users(id)
+);
