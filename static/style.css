@@ -1,3 +1,10 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+}
+
+
 nav .navbar-brand
 {
     /* size for brand */
@@ -5,3 +12,4 @@ nav .navbar-brand
 }
 
 /* colors for brand */
+

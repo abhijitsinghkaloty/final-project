@@ -4,13 +4,34 @@
 	Login
 {% endblock %}
 
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
 {% block body %}
 
-	<form action="/login" method="POST">
-		<input type="text" placeholder="Username" name="username">
-		<input type="password" placeholder="Password" name="password">
-	</form>
+	<div class="container">
 
+		<form action="/login" method="POST">
+			<table>	
+				<tr>
+					<td>
+						<input type="text" placeholder="Username" name="username" autofocus>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" placeholder="Password" name="password">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="button" type="submit">LOGIN</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 {% endblock %}
 
 {% block script %}

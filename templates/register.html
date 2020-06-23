@@ -4,14 +4,36 @@
 	Register
 {% endblock %}
 
+{% block css %}
+	<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
 {% block body %}
-
-	<form action="/login" method="POST">
-		<input type="text" placeholder="Username" name="username">
-		<input type="password" placeholder="Password" name="password" minlength="8">
-		<input type="password" placeholder="Confirm Password" name="confirmation" minlength="8">
-	</form>
-
+	<div class="container">
+		<form action="/login" method="POST">
+			<table>
+				<tr>
+					<td>
+						<input type="text" placeholder="Username" name="username" autofocus>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="password" placeholder="Password" name="password" minlength="8">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="password" placeholder="Confirm Password" name="confirmation" minlength="8">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="button" type="submit">REGISTER</button>
+					</td>
+				</tr>
+		</form>
+	</div>
 {% endblock %}
 
 {% block script %}

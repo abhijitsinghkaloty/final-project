@@ -1,0 +1,31 @@
+body {
+	background-position: 0, 500px;
+	background-image: linear-gradient(to bottom right, green, white, yellow);
+	height: 680px;
+	background-repeat: no-repeat;
+}
+
+.container form table {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
+.container form table tr td input, button{
+
+	text-align: center;
+	width: 200px;
+	height: 40px;
+	margin: 10px;
+
+}
+
+.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	border-radius: 70px;
+}
+
+.button:focus {
+	outline: none;
+}

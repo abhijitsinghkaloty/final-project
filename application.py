@@ -1,5 +1,7 @@
+import os
+
 from cs50 import SQL
-from flask import Flask, render_template, session, redirect, request, flash
+from flask import Flask, render_template, session, redirect, request, flash, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from tempfile import mkdtemp
 from flask_session import Session
@@ -18,7 +20,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Setup database connection
-db = SQL("sqlite3:///database/kindness.db")
+db = SQL("sqlite:///database/kindness.db")
 
 
 def login_required(f):

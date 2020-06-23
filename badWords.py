@@ -17,7 +17,7 @@ def badWordChecker(message):
     profaneWords = []
     
     # Open data file of bad-words
-    with open("./static/bad-words.txt") as data:
+    with open("./database/bad-words.txt") as data:
         # read in the data
         badWords = data.read()
         # split the words by '\n' and store them as a list
