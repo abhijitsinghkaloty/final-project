@@ -1,0 +1,15 @@
+﻿#RegistrationHeader{
+	background-color: #99FF99;
+}
+
+#Sub-Header1{
+	text-align: center;
+	font-size:32px;
+	background-color: #99FF99;
+}
+
+#RegistrationSection{
+left: 50%;
+right: 50%;
+position: absolute;
+}

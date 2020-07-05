@@ -1,0 +1,80 @@
+﻿#body{
+	background-color: #C0C0C0;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+#container{
+	width: 960px;
+}
+
+#Sub-Header1{
+	text-align: center;
+	font-size:32px;
+	background-color: #99FF99;
+}
+
+
+#header{
+	background-position: 100%;
+	background-color: #808080;
+	font-size: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: url('file:C:Users/User/final-project/Where Kindness Begins with You.png');
+	padding-top: 120px;
+	padding-bottom: 120px;
+	height: 20px;
+	background-repeat: no-repeat;
+	font-style: italic;
+	text-align: center;
+}
+
+#nav{
+	background-color: #00FF00;
+	border-width: 12px;
+	word-spacing: 1pt;
+	letter-spacing: 2pt;
+	height: auto;
+	bottom: auto;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+#contentBox1{
+	border: 1px solid #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+#contentBoxTitle1{
+
+}
+#contentBox1-2{
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+#contentBox2{
+	border: 1px solid #000000;
+}
+
+#contentBoxTitle2{
+	
+}
+
+#contentBox2-2{
+	
+}
+
+#footer{
+    width: 100%;
+	border: 1px solid #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: italic;
+	font-variant: normal;
+	color: #000000;
+	background-color: #C0C0C0;
+	text-align: center;
+	height: 48px;
+}

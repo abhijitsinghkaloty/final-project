@@ -1,0 +1,49 @@
+﻿{% extends "layout.html" %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="Registration.css" type="text/css">
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<form action="/login" method="POST"></form>
+		<div id="Sub-Header1">
+  		    Registration Page</div>
+
+		<p id="RegistrationHeader">Welcome to the Registration System! Please enter your username, Email Address and Password to start with!</p>
+		<div id="RegistrationSection">
+			<table>
+				<tr>
+					<td>
+					<p>Username</p>
+						<input type="text" placeholder="Username" name="username" autofocus>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<p>Email Address</p>
+						<input type="text" placeholder="Email Address" name="EmailAddress" minlength="8">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<p>Password</p>
+						<input type="password" placeholder="Password" name="password" minlength="8">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button class="button" type="submit">REGISTER</button>
+					</td>
+				</tr>
+		</form>
+	</div>
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
